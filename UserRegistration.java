@@ -11,6 +11,7 @@ public class UserRegistration {
         user.emailId();
         user.phoneNumber();
         user.password();
+        user.emailSamples();
     }
     public void firstName() {
         System.out.println("Enter first Name : ");
@@ -67,6 +68,18 @@ public class UserRegistration {
         Pattern pattern5 = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=[^@#!$%^&+=]*[@#!$%^&+=][^@#!$%^&+=]*$)(?=.*[0-9]).{8,}$");
         Matcher matcher5 = pattern5.matcher(password);
         if (matcher5.matches()){
+            System.out.println(true);
+        }else{
+            System.out.println(false);
+            System.out.println("Enter password in valid format");
+        }
+    }
+    public void emailSamples() {
+        System.out.println("Enter Email samples : ");
+        String email = scan.next();
+        Pattern pattern6 = Pattern.compile("[a-zA-Z0-9]*[-]*[+]*[a-zA-Z0-9]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+");
+        Matcher matcher6 = pattern6.matcher(email);
+        if (matcher6.matches()){
             System.out.println(true);
         }else{
             System.out.println(false);
