@@ -9,6 +9,7 @@ public class UserRegistration {
         user.firstName();
         user.lastName();
         user.emailId();
+        user.phoneNumber(); 
     }
     public void firstName() {
         System.out.println("Enter first Name : ");
@@ -44,6 +45,18 @@ public class UserRegistration {
         }else{
             System.out.println(false);
             System.out.println("Enter Email ID in valid format ");
+        }
+    }
+    public void phoneNumber(){
+        System.out.println("Enter Mobile Number : ");
+        String mobNumber = scan.next();
+        Pattern pattern4 = Pattern.compile("^[0-9]{2,}[\s][6-9][0-9]{9}$");
+        Matcher matcher4 = pattern4.matcher(mobNumber);
+        if (matcher4.matches()){
+            System.out.println(true);
+        }else{
+            System.out.println(false);
+            System.out.println("Enter Mobile Number in valid format ");
         }
     }
 }
