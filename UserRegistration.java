@@ -60,11 +60,11 @@ public class UserRegistration {
             System.out.println("Enter Mobile Number in valid format ");
         }
     }
-    //Rule3 Should have at least 1 numeric number in the password
+    //RRule4 – Has exactly 1 Special Character
     public void password() {
         System.out.println("Enter Password : ");
         String password = scan.next();
-        Pattern pattern5 = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$");
+        Pattern pattern5 = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=[^@#!$%^&+=]*[@#!$%^&+=][^@#!$%^&+=]*$)(?=.*[0-9]).{8,}$");
         Matcher matcher5 = pattern5.matcher(password);
         if (matcher5.matches()){
             System.out.println(true);
