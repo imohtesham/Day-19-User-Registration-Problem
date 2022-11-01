@@ -7,7 +7,7 @@ public class UserRegistration {
     public static void main(String[] args) {
         UserRegistration user = new UserRegistration();
         user.firstName();
-
+        user.lastName();
     }
     public void firstName() {
         System.out.println("Enter first Name : ");
@@ -17,6 +17,18 @@ public class UserRegistration {
         if (matcher1.matches()) {
             System.out.println(true);
         } else {
+            System.out.println(false);
+            System.out.println("Enter Name in valid format, first letter should be capital case and remaining in small case");
+        }
+    }
+    public void lastName() {
+        System.out.println("Enter last Name : ");
+        String lastName = scan.next();
+        Pattern pattern2 = Pattern.compile("^[A-Z][a-z]{2,}");
+        Matcher matcher2 = pattern2.matcher(lastName);
+        if (matcher2.matches()){
+            System.out.println(true);
+        }else{
             System.out.println(false);
             System.out.println("Enter Name in valid format, first letter should be capital case and remaining in small case");
         }
