@@ -60,15 +60,11 @@ public class UserRegistration {
             System.out.println("Enter Mobile Number in valid format ");
         }
     }
-    //As a User need to
-    //follow predefined
-    //Password rules.
-    //Rule1 minimum 8
-    //Characters - NOTE – All rules must be passed
+    //Rule2 have at least 1 Upper Case
     public void password() {
         System.out.println("Enter Password : ");
         String password = scan.next();
-        Pattern pattern5 = Pattern.compile("[A-za-z0-9]{8,}");
+        Pattern pattern5 = Pattern.compile("[A-Z]+[A-Za-z0-9]{7,}$");
         Matcher matcher5 = pattern5.matcher(password);
         if (matcher5.matches()){
             System.out.println(true);
