@@ -2,123 +2,78 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class UserRegistrationExecption {
-
-    static Scanner scanner= new Scanner(System.in);
-
-    public static void userFirstNameException() throws CustomException{
-
-        String firstNamePattern = "[A-Z]{1}[a-z]{2,}";
-        Pattern pattern = Pattern.compile(firstNamePattern);
-        System.out.println("Enter the firstname");
-        String firstName = scanner.next();
-        Matcher matcher = pattern.matcher(firstName);
-        boolean result = matcher.matches();
-        if(result==false){
-            throw new CustomException("Invalid first name");
-        }else{
-            System.out.println("First name is Vaild");
-        }
-
+//Refactor the Code to
+//use Lambda Function
+//to validate User Entry
+//Use Lambda Function to validate First
+//Name, Last Name, Email, Mobile, and
+//Password
+    interface LambdaFunctionIFace {
+        boolean checkRegex(String data, String name);
     }
 
-    public static void userLastNameException() throws CustomException {
+    class  UserRegistrationExecption {
+        public static String firstName, lastName, emaIlId, mobileNo, password;
+        public static String regexOfFirstName, regexOfLastName, regexOfEmailId, regexOfMobileNo, regexOfPassword;
+        public static Scanner scanner = new Scanner(System.in);
 
-        String lastNamePattern = "[A-Z]{1}[a-z]{2,}";
-        Pattern pattern1 = Pattern.compile(lastNamePattern);
-        System.out.println("Enter the lastname");
-        String lastName = scanner.next();
-        Matcher matcher1 = pattern1.matcher(lastName);
-        boolean result1 = matcher1.matches();
-        if(result1==false){
-            throw new CustomException("Invalid last name");
-        }else{
-            System.out.println("last name is Vaild");
+        public static void main(String[] args) {
+            LambdaFunctionIFace validation = (regex, input) -> {
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(input);
+                return matcher.matches();
+            };
+
+            regexOfFirstName = "^[A-Z]{1}[a-z]{2,}$";
+            System.out.println("Enter your FirstName\n" +
+                    "First Letter Will be UpperCase\n" +
+                    "should Minimum 3 Characters");
+            firstName = scanner.next();
+            if (validation.checkRegex(regexOfFirstName, firstName)) {
+                System.out.println("Given FirstName is Valid");
+            } else {
+                System.out.println("Given FirstName is Invalid");
+            }
+
+            regexOfLastName = "^[A-Z]{1}[a-z]{2,}$";
+            System.out.println("Enter your LastName\n" +
+                    "First Letter Will be UpperCase\n" +
+                    "should Minimum 3 Characters");
+            lastName = scanner.next();
+            if (validation.checkRegex(regexOfLastName, lastName)) {
+                System.out.println("Given LastName is Valid");
+            } else {
+                System.out.println("Given LastName is Invalid");
+            }
+
+            regexOfEmailId = "^[a-zA-Z-9]+([._+-]*[0-9A-Za-z]+)*@[a-zA-Z0-9]+.[a-zA-Z]{2,4}([.][a-z]{2,4})?$";
+            System.out.println("Enter your EmailId");
+            emaIlId = scanner.next();
+            if (validation.checkRegex(regexOfEmailId, emaIlId)) {
+                System.out.println("Given EmailId is Valid");
+            } else {
+                System.out.println("Given EmailId is Invalid");
+            }
+
+            regexOfMobileNo = "^[0-9]{2}\\s{1}[0-9]{10}$";
+            System.out.println("Enter your MobileNo\n" +
+                    "With Country Code");
+            mobileNo = scanner.next();
+            if (validation.checkRegex(regexOfMobileNo, mobileNo)) {
+                System.out.println("Given MobileNo is Valid");
+            } else {
+                System.out.println("Given MobileNo is Invalid");
+            }
+
+            regexOfPassword = "^[a-z](?=.*[A-Z]+)(?=.*[0-9]+).{8,}$";
+            System.out.println("Enter your Password\n" +
+                    "at least contain One Uppercase, one Numeric, One Special Char\n" +
+                    "and minimum 8 field length");
+            password = scanner.next();
+            if (validation.checkRegex(regexOfPassword, password)) {
+                System.out.println("Given Password is Valid");
+            } else {
+                System.out.println("Given Password is Invalid");
+            }
         }
-
-
     }
-
-    public static void userEmailException() throws CustomException {
-        String emailPattern = "^[0-9a-zA-Z]+([._+-][0-9a-zA-Z]+)*" + "@([0-9a-zA-Z][_]?)+[.][a-zA-Z]{2,4}([.][a-zA-Z]{2,4})?$";
-        Pattern pattern2 = Pattern.compile(emailPattern);
-        System.out.println("Enter the Email");
-        String email = scanner.next();
-        Matcher matcher2 = pattern2.matcher(email);
-        boolean result2 = matcher2.matches();
-        if(result2==false){
-            throw new CustomException("Invalid email");
-        }else{
-            System.out.println("Email is Vaild");
-        }
-
-    }
-
-    public static void mobileNumberValidationException() throws CustomException {
-        Scanner scanner = new Scanner(System.in);
-        String MobileNumberPattern = "(91-)?[0-9]{10}";
-        Pattern pattern3 = Pattern.compile(MobileNumberPattern);
-        System.out.println("Enter the Email");
-        String phoneNumber = scanner.next();
-        Matcher matcher3 = pattern3.matcher(phoneNumber);
-        Boolean result3 = matcher3.matches();
-        if(result3==false){
-            throw new CustomException("Invalid Phone Number");
-        }else{
-            System.out.println("Phone Number is Vaild");
-        }
-    }
-
-    public static void passwordValidationException() throws CustomException {
-
-        String PasswordPattern4 = "([0-9a-zA-Z]*[~!@#$]){1}[0-9a-zA-Z~!@#$]*";
-        Pattern pattern7 = Pattern.compile(PasswordPattern4);
-        System.out.println("Enter the Password");
-        String password4 = scanner.next();
-        Matcher matcher7 = pattern7.matcher(password4);
-        boolean result7 = matcher7.matches();
-        if(result7==false){
-            throw new CustomException("Invalid Password follow the password rules");
-        }else{
-            System.out.println("Password is Vaild");
-        }
-    }
-    public static void main(String[] args) {
-        System.out.println("Welcome to User Registration program");
-        System.out.println("Welcome to Exception Handling");
-        try {
-            UserRegistrationExecption.userFirstNameException();
-        } catch (CustomException e) {
-            e.printStackTrace();
-            System.out.println("Custom Exception is handled");
-        }
-        try {
-            UserRegistrationExecption.userLastNameException();
-        } catch (CustomException e) {
-            e.printStackTrace();
-            System.out.println("Custom Exception is handled");
-        }
-        System.out.println("****Rest of codes****");
-        try {
-            UserRegistrationExecption.userEmailException();
-        } catch (CustomException e) {
-            e.printStackTrace();
-            System.out.println("Custom Exception is handled");
-        }
-        try {
-            UserRegistrationExecption.mobileNumberValidationException();
-        } catch (CustomException e) {
-            e.printStackTrace();
-            System.out.println("Custom Exception is handled");
-        }
-        try {
-            UserRegistrationExecption.passwordValidationException();
-        } catch (CustomException e) {
-            e.printStackTrace();
-            System.out.println("Custom Exception is handled");
-        }
-
-    }
-
-
-}
